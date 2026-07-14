@@ -146,7 +146,7 @@ RAMSCRGEN := $(TOOLS_DIR)/ramscrgen/ramscrgen$(EXE)
 FIX       := $(TOOLS_DIR)/gbafix/gbafix$(EXE)
 MAPJSON   := $(TOOLS_DIR)/mapjson/mapjson$(EXE)
 JSONPROC  := $(TOOLS_DIR)/jsonproc/jsonproc$(EXE)
-SCRIPT    := $(TOOLS_DIR/poryscript/poryscript$(EXE)
+SCRIPT    := $(TOOLS_DIR)/poryscript/poryscript$(EXE)
 
 PERL := perl
 SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
@@ -255,8 +255,6 @@ tidymodern:
 include graphics_file_rules.mk
 include map_data_rules.mk
 include json_data_rules.mk
-include audio_rules.mk
-
 include audio_rules.mk
 
 # NOTE: Tools must have been built prior (FIXME)
