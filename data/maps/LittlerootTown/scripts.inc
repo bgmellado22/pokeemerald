@@ -2024,3 +2024,58 @@ LittlerootTown_Text_BirchSomethingToShowYouAtLab:
 	.string "I have something to show you.\n"
 # 1013 "data/maps/LittlerootTown/scripts.pory"
 	.string "Let's go to my LAB.$"
+
+LittlerootTown_EventScript_TestLeader::
+# 1017 "data/maps/LittlerootTown/scripts.pory"
+	lock
+# 1018 "data/maps/LittlerootTown/scripts.pory"
+	faceplayer
+# 1021 "data/maps/LittlerootTown/scripts.pory"
+	goto_if_set FLAG_SYS_POKEMON_GET, LittlerootTown_EventScript_TestLeader_2
+# 1031 "data/maps/LittlerootTown/scripts.pory"
+	msgbox LittlerootTown_EventScript_TestLeader_Text_3
+LittlerootTown_EventScript_TestLeader_1:
+# 1035 "data/maps/LittlerootTown/scripts.pory"
+	release
+	end
+
+LittlerootTown_EventScript_TestLeader_2:
+# 1023 "data/maps/LittlerootTown/scripts.pory"
+	msgbox LittlerootTown_EventScript_TestLeader_Text_0
+# 1025 "data/maps/LittlerootTown/scripts.pory"
+	closemessage
+# 1027 "data/maps/LittlerootTown/scripts.pory"
+	trainerbattle_single TRAINER_SAWYER_1, LittlerootTown_EventScript_TestLeader_Text_1, LittlerootTown_EventScript_TestLeader_Text_2, LittlerootTown_EventScript_TestLeader_Defeated
+	goto LittlerootTown_EventScript_TestLeader_1
+
+
+LittlerootTown_EventScript_TestLeader_Defeated::
+# 1040 "data/maps/LittlerootTown/scripts.pory"
+	msgbox LittlerootTown_EventScript_TestLeader_Defeated_Text_0
+# 1042 "data/maps/LittlerootTown/scripts.pory"
+	release
+	end
+
+
+LittlerootTown_EventScript_TestLeader_Text_0:
+# 1023 "data/maps/LittlerootTown/scripts.pory"
+	.string "¡Hola! Soy tu Líder de pruebas.\n"
+	.string "¿Estás listo para medir tu lógica en C?$"
+
+LittlerootTown_EventScript_TestLeader_Text_1:
+# 1027 "data/maps/LittlerootTown/scripts.pory"
+	.string "¡No tendré piedad!$"
+
+LittlerootTown_EventScript_TestLeader_Text_2:
+# 1027 "data/maps/LittlerootTown/scripts.pory"
+	.string "Vaya, tu lógica es impecable...$"
+
+LittlerootTown_EventScript_TestLeader_Text_3:
+# 1031 "data/maps/LittlerootTown/scripts.pory"
+	.string "¡Hola! Seré tu oponente de pruebas.\n"
+	.string "Vuelve a hablarme cuando tengas un Pokémon.$"
+
+LittlerootTown_EventScript_TestLeader_Defeated_Text_0:
+# 1040 "data/maps/LittlerootTown/scripts.pory"
+	.string "Has superado la prueba de la Fase 1.\n"
+	.string "¡Estamos listos para programar en C!$"

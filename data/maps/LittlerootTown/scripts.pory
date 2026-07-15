@@ -1013,3 +1013,32 @@ LittlerootTown_Text_BirchSomethingToShowYouAtLab:
 	.string "Let's go to my LAB.$"
 
 `
+script LittlerootTown_EventScript_TestLeader {
+    lock
+    faceplayer
+    
+    // Evaluamos si el jugador ya tiene un Pokémon en su equipo
+    if (flag(FLAG_SYS_POKEMON_GET)) {
+        // El jugador tiene Pokémon. Iniciamos el combate.
+        msgbox("¡Hola! Soy tu Líder de pruebas.\n"
+               "¿Estás listo para medir tu lógica en C?")
+        closemessage
+        
+        trainerbattle_single(TRAINER_SAWYER_1, "¡No tendré piedad!", "Vaya, tu lógica es impecable...", LittlerootTown_EventScript_TestLeader_Defeated)
+    } else {
+        // El jugador NO tiene Pokémon todavía. 
+        // Evitamos el combate y le mostramos un diálogo preventivo.
+        msgbox("¡Hola! Seré tu oponente de pruebas.\n"
+               "Vuelve a hablarme cuando tengas un Pokémon.")
+    }
+    
+    release
+    end
+}
+
+script LittlerootTown_EventScript_TestLeader_Defeated {
+    msgbox("Has superado la prueba de la Fase 1.\n"
+           "¡Estamos listos para programar en C!")
+    release
+    end
+}
