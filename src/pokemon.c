@@ -3103,6 +3103,24 @@ void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move)
     (var) /= (gStatStageRatios)[(mon)->statStages[(statIndex)]][1];                 \
 }
 
+static u8 GetMoveSplit(u16 move)
+{
+    // Si el movimiento tiene asignado explícitamente SPLIT_SPECIAL o SPLIT_STATUS, lo usamos
+    if (gBattleMoves[move].split != SPLIT_PHYSICAL)
+        return gBattleMoves[move].split;
+    
+    // Si no hace daño directo y no es un movimiento de daño fijo/especial, es de estado
+    if (gBattleMoves[move].power == 0)
+        return SPLIT_STATUS;
+
+    // Si el tipo elemental original es físico, por defecto es Físico
+    if (IS_TYPE_PHYSICAL(gBattleMoves[move].type))
+        return SPLIT_PHYSICAL;
+
+    // De lo contrario, por defecto es Especial
+    return SPLIT_SPECIAL;
+}
+
 s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 sideStatus, u16 powerOverride, u8 typeOverride, u8 battlerIdAtk, u8 battlerIdDef)
 {
     u32 i;
@@ -3173,7 +3191,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         if (attackerHoldEffect == sHoldEffectToType[i][0]
             && type == sHoldEffectToType[i][1])
         {
-            if (IS_TYPE_PHYSICAL(type))
+            if (GetMoveSplit(move) == SPLIT_PHYSICAL)
                 attack = (attack * (attackerHoldEffectParam + 100)) / 100;
             else
                 spAttack = (spAttack * (attackerHoldEffectParam + 100)) / 100;
@@ -3229,7 +3247,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (gBattleMoves[gCurrentMove].effect == EFFECT_EXPLOSION)
         defense /= 2;
 
-    if (IS_TYPE_PHYSICAL(type))
+    if (GetMoveSplit(move) == SPLIT_PHYSICAL)
     {
         if (gCritMultiplier == 2)
         {
@@ -3284,7 +3302,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (type == TYPE_MYSTERY)
         damage = 0; // is ??? type. does 0 damage.
 
-    if (IS_TYPE_SPECIAL(type))
+    if (GetMoveSplit(move) == SPLIT_SPECIAL)
     {
         if (gCritMultiplier == 2)
         {
