@@ -292,6 +292,9 @@ struct BattlePokemon
     /*0x4C*/ u32 status1;
     /*0x50*/ u32 status2;
     /*0x54*/ u32 otId;
+    // Megaevolución
+    u8 isMegaEvolved:1;
+    u16 originalSpecies;
 };
 
 struct SpeciesInfo
@@ -544,5 +547,6 @@ bool8 HasTwoFramesAnimation(u16 species);
 struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 managerId, u8 mode);
 void DestroyMonSpritesGfxManager(u8 managerId);
 u8 *MonSpritesGfxManager_GetSpritePtr(u8 managerId, u8 spriteNum);
+#define IS_MEGA_EVOLVED(mon) ((mon)->isMegaEvolved)
 
 #endif // GUARD_POKEMON_H
