@@ -51,8 +51,8 @@ enum {
     PSS_PAGE_INFO,
     PSS_PAGE_SKILLS,
     PSS_PAGE_BATTLE_MOVES,
-    PSS_PAGE_CONTEST_MOVES,
     PSS_PAGE_COUNT,
+    PSS_PAGE_CONTEST_MOVES,
 };
 
 // Screen titles (upper left)
@@ -1115,18 +1115,16 @@ void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, 
     {
     case SUMMARY_MODE_NORMAL:
     case SUMMARY_MODE_BOX:
-        sMonSummaryScreen->minPageIndex = 0;
-        sMonSummaryScreen->maxPageIndex = PSS_PAGE_COUNT - 1;
+        sMonSummaryScreen->minPageIndex = PSS_PAGE_INFO;
+        sMonSummaryScreen->maxPageIndex = PSS_PAGE_BATTLE_MOVES;
         break;
     case SUMMARY_MODE_LOCK_MOVES:
-        sMonSummaryScreen->minPageIndex = 0;
-        sMonSummaryScreen->maxPageIndex = PSS_PAGE_COUNT - 1;
-        sMonSummaryScreen->lockMovesFlag = TRUE;
+        sMonSummaryScreen->minPageIndex = PSS_PAGE_INFO;
+        sMonSummaryScreen->maxPageIndex = PSS_PAGE_BATTLE_MOVES;
         break;
     case SUMMARY_MODE_SELECT_MOVE:
         sMonSummaryScreen->minPageIndex = PSS_PAGE_BATTLE_MOVES;
-        sMonSummaryScreen->maxPageIndex = PSS_PAGE_COUNT - 1;
-        sMonSummaryScreen->lockMonFlag = TRUE;
+        sMonSummaryScreen->maxPageIndex = PSS_PAGE_BATTLE_MOVES;
         break;
     }
 
